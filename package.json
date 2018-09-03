@@ -1,0 +1,18 @@
+{
+    "name": "laravel-api",
+    "description": "",
+    "version": "0.0.0",
+    "license": "MIT",
+    "author": {
+        "name": "Pascal Iske",
+        "email": "info@pascal-iske.de",
+        "url": "https://pascal-iske.de"
+    },
+    "scripts": {
+        "format": "prettier --config .prettierrc --write {*,!vendor}/**/*.{php,md}"
+    },
+    "devDependencies": {
+        "@prettier/plugin-php": "^0.6.0",
+        "prettier": "^1.14.2"
+    }
+}

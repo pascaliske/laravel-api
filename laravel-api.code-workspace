@@ -1,0 +1,50 @@
+{
+    "folders": [
+        {
+            "path": "."
+        },
+        {
+            "name": "config",
+            "path": "./config"
+        },
+        {
+            "name": "app",
+            "path": "./app"
+        },
+        {
+            "name": "controllers",
+            "path": "./app/Api"
+        },
+        {
+            "name": "routes",
+            "path": "./routes"
+        },
+        {
+            "name": "database",
+            "path": "./database"
+        }
+    ],
+    "settings": {
+        "editor.formatOnSave": true,
+        "editor.formatOnType": true,
+        "search.exclude": {
+            "**/vendor": true
+        },
+        "[php]": {
+            "editor.formatOnSave": true,
+            "editor.formatOnType": true
+        },
+        "[yaml]": {
+            "editor.formatOnSave": false,
+            "editor.formatOnType": false
+        },
+        "[json]": {
+            "editor.formatOnSave": false,
+            "editor.formatOnType": false
+        },
+        "[jsonc]": {
+            "editor.formatOnSave": false,
+            "editor.formatOnType": false
+        }
+    }
+}
