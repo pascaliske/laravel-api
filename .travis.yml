@@ -7,3 +7,9 @@ before_script:
   - cp .env.travis .env
 script:
   - vendor/bin/phpunit --coverage-text
+notifications:
+  slack:
+    rooms:
+      - secure: A3SuC9o3M6aYb4rs15iQI9goyIAGyzp4/uzwKjk24qy9HQbvssY3877s/JOrrKbalhgHUSQr1GNO8X0fOcXE6wbNZ0+lSLtzUaDAIBv0GexiiCF8+Q6c7qbjKrEIqGDxgKQ+L5MmBeCdm7JL0DsDdkyo3CMHy6SSY6z9doUfIwZHA/KrsPE1psHkGoNqGt2m/fXQ4sxSv7F92/b8DR2GfuELuH6wBnRDjEKVF1YeVQbTjvU7UWqJGEmDk9q/Tm88aW1HMt9w+AxH+/0AlzW7qNplMSyd0cbAD9YAxTt5eXT+2M8YZuJPT/o8ld/QVluDhEhGWMB+XLLq4yvO8YfvIqZgcZw+gbaPVYx3Q6MMB3iEg1/B39m6hnHeonkyMN4DyrqLuBY1B25JY3gcmzXXmnOXlX/qa9zk58NFJqYBVH2luPVpQCGDSYci2F5gKX+0PoPbPuXhAYZoGil7vVejBnMWjmSWl11uJuV23uVRHXLSnvbDLr3dHB1fZuHacwitxSsGuXzIYArrq7p7zDlnqFq3ucMKLgf6amIh5T4eAxdk3kdlLZZJR7YJgdATBrLDJpL+DJWpknV8oZOfpisvZ6iKfVLaZNfdpWpg7FeAK8/NV0GTnRgkcfphPBcYuzb8mVJwGHGo79pwLJdxoy/I//Jxc4eYrrg3HnDuaYjr7g8=
+    on_success: change
+    on_failure: always
