@@ -2,9 +2,10 @@ language: php
 php:
   - '7.1'
 before_script:
+  - cp .env.travis .env
+  - mysql -e 'create database laravel_api;'
   - composer self-update
   - composer install --no-interaction
-  - cp .env.travis .env
 script:
   - vendor/bin/phpunit --coverage-text
 notifications:
