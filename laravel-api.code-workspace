@@ -12,7 +12,7 @@
             "path": "./app"
         },
         {
-            "name": "controllers",
+            "name": "api",
             "path": "./app/Api"
         },
         {

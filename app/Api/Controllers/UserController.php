@@ -3,13 +3,22 @@
 namespace App\Api\Controllers;
 
 use App\Api\Models\User;
+use App\Api\Traits\Restriction;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Dingo\Api\Routing\Helpers;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    use Helpers;
+    use Helpers, Restriction;
+
+    public function __construct()
+    {
+        $this->restrict('can:read-user', ['fetch', 'fetchAll']);
+        $this->restrict('can:create-user', ['create']);
+        $this->restrict('can:update-user', ['update']);
+        $this->restrict('can:delete-user', ['delete']);
+    }
 
     /**
      * Display the specified resource.

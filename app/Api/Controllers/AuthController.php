@@ -2,10 +2,18 @@
 
 namespace App\Api\Controllers;
 
+use App\Api\Traits\Restriction;
 use App\Http\Controllers\Controller;
+use Dingo\Api\Routing\Helpers;
 
 class AuthController extends Controller
 {
+    use Helpers, Restriction;
+
+    public function __construct() {
+        $this->restrict(['logout', 'refresh', 'me']);
+    }
+
     /**
      * Log the user in with the given credentials.
      *

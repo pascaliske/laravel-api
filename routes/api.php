@@ -18,9 +18,6 @@ use Illuminate\Http\Request;
  */
 $api = app('Dingo\Api\Routing\Router');
 $api->version('v1', ['namespace' => 'App\Api\Controllers'], function ($api) {
-    /**
-     * Public
-     */
     $api->group(['prefix' => 'auth'], function ($api) {
         $api->post('login', 'AuthController@login');
         $api->post('logout', 'AuthController@logout');
@@ -28,25 +25,28 @@ $api->version('v1', ['namespace' => 'App\Api\Controllers'], function ($api) {
         $api->get('me', 'AuthController@me');
     });
 
-    /**
-     * Protected
-     */
-    $api->group(['middleware' => 'api.auth'], function ($api) {
-        $api->group(['prefix' => 'user'], function ($api) {
-            $api->get('/', 'UserController@fetchAll');
-            $api->get('/{id}', 'UserController@fetch');
-            $api->post('/', 'UserController@create');
-            $api->patch('/{id}', 'UserController@update');
-            $api->delete('/{id}', 'UserController@delete');
-        });
+    $api->group(['prefix' => 'user'], function ($api) {
+        $api->get('/', 'UserController@fetchAll');
+        $api->get('/{id}', 'UserController@fetch');
+        $api->post('/', 'UserController@create');
+        $api->patch('/{id}', 'UserController@update');
+        $api->delete('/{id}', 'UserController@delete');
+    });
 
-        $api->group(['prefix' => 'page'], function ($api) {
-            $api->get('/', 'PageController@fetchAll');
-            $api->get('/{id}', 'PageController@fetch');
-            $api->post('/', 'PageController@create');
-            $api->patch('/{id}', 'PageController@update');
-            $api->delete('/{id}', 'PageController@delete');
-        });
+    $api->group(['prefix' => 'page'], function ($api) {
+        $api->get('/', 'PageController@fetchAll');
+        $api->get('/{id}', 'PageController@fetch');
+        $api->post('/', 'PageController@create');
+        $api->patch('/{id}', 'PageController@update');
+        $api->delete('/{id}', 'PageController@delete');
+    });
+
+    $api->group(['prefix' => 'media'], function ($api) {
+        $api->get('/', 'MediaController@fetchAll');
+        $api->get('/{id}', 'MediaController@fetch');
+        $api->post('/', 'MediaController@create');
+        $api->patch('/{id}', 'MediaController@update');
+        $api->delete('/{id}', 'MediaController@delete');
     });
 });
 

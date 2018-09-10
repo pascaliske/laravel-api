@@ -3,13 +3,22 @@
 namespace App\Api\Controllers;
 
 use App\Api\Models\Page;
+use App\Api\Traits\Restriction;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Dingo\Api\Routing\Helpers;
+use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-    use Helpers;
+    use Helpers, Restriction;
+
+    public function __construct()
+    {
+        $this->restrict('can:read-page', ['fetch', 'fetchAll']);
+        $this->restrict('can:create-page', ['create']);
+        $this->restrict('can:update-page', ['update']);
+        $this->restrict('can:delete-page', ['delete']);
+    }
 
     /**
      * Display the specified resource.
