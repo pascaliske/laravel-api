@@ -8,14 +8,40 @@ class PermissionsSeeder extends Seeder
 {
     private $roles = [
         'admin' => [
-            'read-users',
-            'create-users',
-            'update-users',
-            'delete-users',
+            'read-user',
+            'create-user',
+            'update-user',
+            'delete-user',
+            'read-page',
+            'create-page',
+            'update-page',
+            'delete-page',
+            'read-media',
+            'create-media',
+            'update-media',
+            'delete-media',
         ],
-        'content-master' => [],
-        'content-author' => [],
-        'member' => [],
+        'content-master' => [
+            'read-page',
+            'create-page',
+            'update-page',
+            'delete-page',
+            'read-media',
+            'create-media',
+            'update-media',
+            'delete-media',
+        ],
+        'content-author' => [
+            'read-page',
+            'read-media',
+            'create-media',
+            'update-media',
+            'delete-media',
+        ],
+        'member' => [
+            'read-page',
+            'read-media',
+        ],
     ];
 
     /**
@@ -32,7 +58,7 @@ class PermissionsSeeder extends Seeder
             $role = Role::create(['name' => $role]);
 
             foreach ($permissions as $permission) {
-                Permission::create(['name' => $permission])->assignRole($role);
+                Permission::findOrCreate($permission)->assignRole($role);
             }
         }
     }
