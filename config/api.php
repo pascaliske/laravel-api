@@ -152,7 +152,11 @@ return [
     |
     */
 
-    'middleware' => [],
+    'middleware' => [
+        \Illuminate\Foundation\Http\Middleware\TrimStrings::class,
+        \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+        \Spatie\Cors\Cors::class,
+    ],
 
     /*
     |--------------------------------------------------------------------------
