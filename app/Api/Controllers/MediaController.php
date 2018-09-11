@@ -99,4 +99,20 @@ class MediaController extends Controller
 
         $media->delete();
     }
+
+    /**
+     * Runs image optimizations on demand.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function optimize()
+    {
+        $exit = Artisan::call('media:optimize');
+
+        if ($exit > 0) {
+            return response()->json(['error' => 'Error during image optimization process.'], 500);
+        }
+
+        return response(null, 204);
+    }
 }

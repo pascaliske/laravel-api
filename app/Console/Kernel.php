@@ -22,6 +22,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $log = storage_path('logs/cronjobs.log');
+
+        $schedule->command('media:optimize')->daily()->appendOutputTo($log);
     }
 
     /**

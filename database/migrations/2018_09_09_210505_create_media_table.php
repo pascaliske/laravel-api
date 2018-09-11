@@ -22,6 +22,7 @@ class CreateMediaTable extends Migration
             $table->string('path');
             $table->string('type');
             $table->unsignedInteger('author');
+            $table->boolean('optimized')->default(false);
             $table->timestamp('created')->default(Db::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated')->default(Db::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
 

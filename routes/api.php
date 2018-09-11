@@ -47,6 +47,7 @@ $api->version('v1', ['namespace' => 'App\Api\Controllers'], function ($api) {
         $api->post('/', 'MediaController@create');
         $api->patch('/{id}', 'MediaController@update');
         $api->delete('/{id}', 'MediaController@delete');
+        $api->post('/optimize', 'MediaController@optimize');
     });
 });
 
