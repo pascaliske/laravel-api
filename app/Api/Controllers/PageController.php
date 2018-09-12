@@ -53,7 +53,7 @@ class PageController extends Controller
             'title' => $request->title,
             'description' => $request->description,
             'path' => $request->path,
-            'fields' => $request->fields,
+            'components' => $request->components,
             'author' => $request->author,
             'published' => $request->published ? true : false,
         ]);
@@ -72,7 +72,7 @@ class PageController extends Controller
             'title' => $request->title,
             'description' => $request->description,
             'path' => $request->path,
-            'fields' => $request->fields,
+            'components' => $request->components,
             'author' => $request->author,
             'published' => $request->published ? true : false,
         ]);

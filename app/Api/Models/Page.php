@@ -9,5 +9,7 @@ class Page extends Model
     const CREATED_AT = 'created';
     const UPDATED_AT = 'updated';
 
-    protected $fillable = ['title', 'description', 'path', 'fields', 'author', 'published'];
+    protected $fillable = ['title', 'description', 'path', 'components', 'author', 'published'];
+
+    protected $casts = ['components' => 'array'];
 }

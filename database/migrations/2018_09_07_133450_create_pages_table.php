@@ -20,7 +20,7 @@ class CreatePagesTable extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->string('path');
-            $table->text('fields')->nullable();
+            $table->text('components')->nullable();
             $table->unsignedInteger('author');
             $table->boolean('published')->default(false);
             $table->timestamp('created')->default(Db::raw('CURRENT_TIMESTAMP'));
