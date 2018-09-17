@@ -19,4 +19,9 @@ class Page extends Model
     {
         return $this->belongsTo('App\Api\Models\User', 'id');
     }
+
+    public function scopePublished($query)
+    {
+        return $query->where('published', true);
+    }
 }

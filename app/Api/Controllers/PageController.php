@@ -20,6 +20,52 @@ class PageController extends Controller
         $this->restrict('can:delete-page', ['delete']);
     }
 
+    /** --- PUBLIC --- **/
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  string  $path
+     * @return \Illuminate\Http\Response
+     */
+    public function fetchByPath($path)
+    {
+        $page = Page::published()->with('author')->where('path', "/$path")->first();
+
+        if (!$page) {
+            abort(404, 'Page not found.');
+        }
+
+        return $page;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function fetchPublished()
+    {
+        $pages = Page::published()->with('author')->get([
+            'id',
+            'title',
+            'description',
+            'path',
+            'components',
+            'author',
+            'created',
+            'updated',
+        ]);
+
+        if (!$pages) {
+            abort(404, 'No published pages found.');
+        }
+
+        return response()->json($pages);
+    }
+
+    /** --- RESTRICTED --- **/
+
     /**
      * Display the specified resource.
      *
