@@ -31,6 +31,11 @@ class User extends Authenticatable implements JWTSubject
         'confirmed',
     ];
 
+    protected $casts = [
+        'activated' => 'boolean',
+        'confirmed' => 'boolean',
+    ];
+
     /**
      * The attributes that should be hidden for arrays.
      *

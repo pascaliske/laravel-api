@@ -11,7 +11,11 @@ class Page extends Model
 
     protected $fillable = ['title', 'description', 'path', 'components', 'published'];
 
-    protected $casts = ['components' => 'array'];
+    protected $casts = [
+        'components' => 'array',
+        'published' => 'boolean'
+    ];
+
     /**
      * Get the user that created the page.
      */
