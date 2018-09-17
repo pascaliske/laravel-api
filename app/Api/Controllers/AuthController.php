@@ -2,6 +2,7 @@
 
 namespace App\Api\Controllers;
 
+use App\Api\Models\User;
 use App\Api\Traits\Restriction;
 use App\Http\Controllers\Controller;
 use Dingo\Api\Routing\Helpers;
@@ -10,7 +11,8 @@ class AuthController extends Controller
 {
     use Helpers, Restriction;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->restrict(['logout', 'refresh', 'me']);
     }
 
@@ -39,7 +41,7 @@ class AuthController extends Controller
     {
         auth()->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return response(null, 204);
     }
 
     /**
@@ -59,7 +61,8 @@ class AuthController extends Controller
      */
     public function me()
     {
-        return response()->json(auth()->user());
+        $id = auth()->user()->id;
+        return User::findOrFail($id)->with('roles')->first();
     }
 
     /**

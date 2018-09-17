@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
  */
 $api = app('Dingo\Api\Routing\Router');
 $api->version('v1', ['namespace' => 'App\Api\Controllers'], function ($api) {
+    // auth
     $api->group(['prefix' => 'auth'], function ($api) {
         $api->post('login', 'AuthController@login');
         $api->post('logout', 'AuthController@logout');

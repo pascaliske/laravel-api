@@ -20,6 +20,10 @@ class UserController extends Controller
         $this->restrict('can:delete-user', ['delete']);
     }
 
+    /** --- PUBLIC --- **/
+
+    /** --- RESTRICTED --- **/
+
     /**
      * Display the specified resource.
      *
@@ -28,7 +32,7 @@ class UserController extends Controller
      */
     public function fetch($id)
     {
-        return User::findOrFail($id);
+        return User::find($id)->with('roles')->first();
     }
 
     /**
@@ -38,7 +42,7 @@ class UserController extends Controller
      */
     public function fetchAll()
     {
-        return User::all();
+        return User::with('roles')->get();
     }
 
     /**
