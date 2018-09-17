@@ -39,6 +39,14 @@ class User extends Authenticatable implements JWTSubject
     protected $hidden = ['password'];
 
     /**
+     * Get the pages the user has created.
+     */
+    public function pages()
+    {
+        return $this->hasMany('App\Api\Models\Page', 'author');
+    }
+
+    /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
      * @return mixed
