@@ -31,6 +31,8 @@ $api->version('v1', ['namespace' => 'App\Api\Controllers'], function ($api) {
         $api->get('/published', 'PageController@fetchPublished');
         $api->get('/{path}', 'PageController@fetchByPath');
     });
+    $api->get('/file/{id}/{download}', 'MediaController@file');
+    $api->get('/image/{id}/{size}', 'MediaController@image');
 
     // restricted
     $api->group(['prefix' => '-'], function ($api) {

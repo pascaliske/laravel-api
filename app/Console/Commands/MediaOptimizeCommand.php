@@ -74,15 +74,13 @@ class MediaOptimizeCommand extends Command
 
     private function select()
     {
-        $media = Media::where('optimized', 0);
+        $media = Media::images();
 
         if ($this->option('force')) {
-            return $media->orWhere('optimized', 1);
+            return $media;
         }
 
-        return $media->where(function ($query) {
-            $query->where('type', 'image/png')->orWhere('type', 'image/jpeg');
-        });
+        return $media->where('optimized', 0);
     }
 
     private function optimize($file)

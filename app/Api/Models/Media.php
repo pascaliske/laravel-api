@@ -34,4 +34,9 @@ class Media extends Model
     {
         return $this->belongsTo('App\Api\Models\User', 'id');
     }
+
+    public function scopeImages($query)
+    {
+        return $query->where('type', 'like', '%image%');
+    }
 }
