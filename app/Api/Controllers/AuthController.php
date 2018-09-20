@@ -59,7 +59,7 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function me()
+    public function identity()
     {
         $id = auth()->user()->id;
         return User::findOrFail($id)->with('roles')->first();

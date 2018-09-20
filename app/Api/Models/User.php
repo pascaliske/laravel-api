@@ -52,6 +52,14 @@ class User extends Authenticatable implements JWTSubject
     }
 
     /**
+     * Get the media the user has uploaded.
+     */
+    public function media()
+    {
+        return $this->hasMany('App\Api\Models\Media', 'author');
+    }
+
+    /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
      * @return mixed

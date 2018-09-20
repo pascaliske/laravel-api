@@ -14,5 +14,24 @@ class Media extends Model
      *
      * @var array
      */
-    protected $fillable = ['title', 'description', 'path', 'type', 'author', 'optimized'];
+    protected $fillable = [
+        'title',
+        'description',
+        'path',
+        'type',
+        'author',
+        'optimized'
+    ];
+
+    protected $casts = [
+        'optimized' => 'boolean',
+    ];
+
+    /**
+     * Get the user that uploaded the media file.
+     */
+    public function author()
+    {
+        return $this->belongsTo('App\Api\Models\User', 'id');
+    }
 }

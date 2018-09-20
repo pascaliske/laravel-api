@@ -49,6 +49,7 @@ class PageController extends Controller
         $pages = Page::published()->with('author')->get([
             'id',
             'title',
+            'subtitle',
             'description',
             'path',
             'components',
@@ -74,7 +75,7 @@ class PageController extends Controller
      */
     public function fetch($id)
     {
-        return Page::findOrFail($id);
+        return Page::where('id', $id)->with('author')->first();
     }
 
     /**
@@ -84,7 +85,7 @@ class PageController extends Controller
      */
     public function fetchAll()
     {
-        return Page::all();
+        return Page::with('author')->get();
     }
 
     /**
@@ -97,6 +98,7 @@ class PageController extends Controller
     {
         Page::create([
             'title' => $request->title,
+            'subtitle' => $request->subtitle,
             'description' => $request->description,
             'path' => $request->path,
             'components' => $request->components,
@@ -116,6 +118,7 @@ class PageController extends Controller
     {
         $this->updateModel(Page::findOrFail($id), [
             'title' => $request->title,
+            'subtitle' => $request->subtitle,
             'description' => $request->description,
             'path' => $request->path,
             'components' => $request->components,
