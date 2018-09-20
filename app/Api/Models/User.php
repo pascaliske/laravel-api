@@ -59,6 +59,21 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany('App\Api\Models\Media', 'author');
     }
 
+    public function scopeActivated($query)
+    {
+        return $query->where('activated', true);
+    }
+
+    public function scopeConfirmed($query)
+    {
+        return $query->where('confirmed', true);
+    }
+
+    public function scopeCanLogin($query, $email)
+    {
+        return $query->where('activated', true)->where('confirmed', true)->where('email', $email);
+    }
+
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *

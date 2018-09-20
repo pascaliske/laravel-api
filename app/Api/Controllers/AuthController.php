@@ -25,6 +25,10 @@ class AuthController extends Controller
     {
         $credentials = request(['email', 'password']);
 
+        if (!User::canLogin($credentials['email'])->first()) {
+            return abort(403, 'User is not activated or confirmed');
+        }
+
         if (!$token = auth()->attempt($credentials, true)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
