@@ -18,6 +18,7 @@ class CreatePagesTable extends Migration
             // columns
             $table->increments('id');
             $table->string('title');
+            $table->text('subtitle')->nullable();
             $table->text('description')->nullable();
             $table->string('path');
             $table->text('components')->nullable();
@@ -27,6 +28,7 @@ class CreatePagesTable extends Migration
             $table->timestamp('updated')->default(Db::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
 
             // indexes
+            $table->unique('path');
             $table
                 ->foreign('author')
                 ->references('id')
