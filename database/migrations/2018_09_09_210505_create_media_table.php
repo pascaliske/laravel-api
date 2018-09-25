@@ -27,6 +27,7 @@ class CreateMediaTable extends Migration
             $table->timestamp('updated')->default(Db::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
 
             // indexes
+            $table->unique('path');
             $table
                 ->foreign('author')
                 ->references('id')

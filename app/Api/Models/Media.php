@@ -39,4 +39,15 @@ class Media extends Model
     {
         return $query->where('type', 'like', '%image%');
     }
+
+    public function getOriginalPath()
+    {
+        return sprintf('%s/%s', storage_path('app'), $this->path);
+    }
+
+    public function getOptimizedPath()
+    {
+        $info = pathinfo($this->path);
+        return sprintf('%s/%s/%s.webp', storage_path('app'), $info['dirname'], $info['filename']);
+    }
 }

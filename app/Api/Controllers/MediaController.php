@@ -29,14 +29,14 @@ class MediaController extends Controller
 
         // force downloading of file
         if ($download == 1) {
-            $extension = pathinfo($this->getFullPath($file->path))['extension'];
-            $filename = sprintf('%s.%s', str_slug($file->title, '-'), $extension);
+            $filename = str_slug($file->title, '-');
+            $extension = pathinfo($file->getOriginalPath())['extension'];
 
-            return response()->download($this->getFullPath($file->path), $filename);
+            return response()->download($file->getOriginalPath(), sprintf('%s.%s', $filename, $extension));
         }
 
         // display file in browser
-        return response()->file($this->getFullPath($file->path));
+        return response()->file($file->getOriginalPath());
     }
 
     public function image(Request $request, int $id, string $size)
@@ -47,16 +47,13 @@ class MediaController extends Controller
             return abort(404, 'Not found');
         }
 
-        // serve optimized version if browser supports it
-        if ($image->optimized && strpos($request->headers->get('accept'), 'image/webp') !== false) {
-            $path = pathinfo($image->path);
-            $file = sprintf('%s/%s.webp', $path['dirname'], $path['filename']);
-
-            return response()->file($this->getFullPath($file));
+        // serve optimized version if available and supported
+        if ($this->hasOptimizedVersion($image) && strpos($request->headers->get('accept'), 'image/webp') !== false) {
+            return response()->file($image->getOptimizedPath());
         }
 
         // serve default image
-        return response()->file($this->getFullPath($image->path));
+        return response()->file($image->getOriginalPath());
     }
 
     /** --- RESTRICTED --- **/
@@ -156,8 +153,12 @@ class MediaController extends Controller
         return response(null, 204);
     }
 
-    private function getFullPath($file)
+    private function hasOptimizedVersion($image)
     {
-        return sprintf('%s/%s', storage_path('app'), $file);
+        if ($image->optimized && file_exists($image->getOptimizedPath())) {
+            return true;
+        }
+
+        return false;
     }
 }

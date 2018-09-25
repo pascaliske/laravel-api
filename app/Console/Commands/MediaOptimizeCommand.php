@@ -85,9 +85,8 @@ class MediaOptimizeCommand extends Command
 
     private function optimize($file)
     {
-        $from = sprintf('%s/%s', storage_path('app'), $file->path);
-        $pathInfo = pathinfo($from);
-        $to = sprintf('%s/%s.webp', $pathInfo['dirname'], $pathInfo['filename']);
+        $from = $file->getOriginalPath();
+        $to = $file->getOptimizedPath();
 
         $success = WebPConvert::convert($from, $to, [
             'quality' => 80,
