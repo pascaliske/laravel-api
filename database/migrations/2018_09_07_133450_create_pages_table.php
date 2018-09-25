@@ -18,8 +18,6 @@ class CreatePagesTable extends Migration
             // columns
             $table->increments('id');
             $table->string('title');
-            $table->text('subtitle')->nullable();
-            $table->text('description')->nullable();
             $table->string('path');
             $table->text('components')->nullable();
             $table->unsignedInteger('author');

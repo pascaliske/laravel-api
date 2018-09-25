@@ -49,8 +49,6 @@ class PageController extends Controller
         $pages = Page::published()->with('author')->get([
             'id',
             'title',
-            'subtitle',
-            'description',
             'path',
             'components',
             'author',
@@ -98,8 +96,6 @@ class PageController extends Controller
     {
         Page::create([
             'title' => $request->title,
-            'subtitle' => $request->subtitle,
-            'description' => $request->description,
             'path' => $request->path,
             'components' => $request->components,
             'author' => $request->author,
@@ -118,8 +114,6 @@ class PageController extends Controller
     {
         $this->updateModel(Page::findOrFail($id), [
             'title' => $request->title,
-            'subtitle' => $request->subtitle,
-            'description' => $request->description,
             'path' => $request->path,
             'components' => $request->components,
             'author' => $request->author,
