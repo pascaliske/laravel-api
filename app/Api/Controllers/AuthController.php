@@ -2,6 +2,7 @@
 
 namespace App\Api\Controllers;
 
+use Exception;
 use App\Api\Models\User;
 use App\Api\Traits\Restriction;
 use App\Http\Controllers\Controller;
@@ -65,8 +66,12 @@ class AuthController extends Controller
      */
     public function identity()
     {
-        $id = auth()->user()->id;
-        return User::findOrFail($id)->with('roles')->first();
+        try {
+            $id = auth()->user()->id;
+            return User::findOrFail($id)->with('roles')->first();
+        } catch (Exception $e) {
+            return abort(403, 'Forbidden');
+        }
     }
 
     /**
