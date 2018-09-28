@@ -10,3 +10,4 @@ storage/*
 .env
 .env.prod
 .phpunit.result.cache
+composer.phar
