@@ -3,8 +3,10 @@
 .vagrant
 node_modules
 vendor
+public/storage
 storage/*
 !storage/.gitkeep
 *.log
 .env
+.env.prod
 .phpunit.result.cache
