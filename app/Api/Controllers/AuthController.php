@@ -14,7 +14,7 @@ class AuthController extends Controller
 
     public function __construct()
     {
-        $this->restrict(['logout', 'refresh', 'me']);
+        $this->restrict(['refresh', 'me']);
     }
 
     /**
@@ -70,7 +70,7 @@ class AuthController extends Controller
             $id = auth()->user()->id;
             return User::findOrFail($id)->with('roles')->first();
         } catch (Exception $e) {
-            return abort(403, 'Forbidden');
+            return abort(401, 'Unauthorized');
         }
     }
 
