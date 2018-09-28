@@ -91,16 +91,27 @@ class MediaController extends Controller
         $path = Storage::putFile('public', $file);
 
         try {
-            Media::create([
+            // fetch current user
+            $user = auth()->user();
+
+            if (!$user) {
+                throw new Exception('Unauthorized');
+            }
+
+            // create media item
+            $media = Media::create([
                 'title' => $request->title,
                 'description' => $request->description,
                 'path' => $path,
                 'type' => $file->getMimeType(),
-                'author' => $request->author,
+                'author' => $user->id,
             ]);
+
+            return response()->json($media);
         } catch (Exception $exception) {
             Storage::delete($path);
-            throw $exception;
+
+            return abort(500, $exception->getMessage());
         }
     }
 
