@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -21,8 +22,8 @@ class CreatePagesTable extends Migration
             $table->text('components')->nullable();
             $table->unsignedInteger('author');
             $table->boolean('published')->default(false);
-            $table->timestamp('created')->default(Db::raw('CURRENT_TIMESTAMP'));
-            $table->timestamp('updated')->default(Db::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+            $table->timestamp('created')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
 
             // indexes
             $table->unique('path');
