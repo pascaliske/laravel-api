@@ -1,2 +1,2 @@
 !.env.prod
-!composer.phar
+composer.phar:composer.lock
