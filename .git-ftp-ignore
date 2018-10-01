@@ -1,0 +1,7 @@
+.editorconfig
+.gitattributes
+.prettierrc
+.travis.yml
+.env.*
+*.code-*
+phpunit.xml
