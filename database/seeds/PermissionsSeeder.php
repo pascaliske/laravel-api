@@ -8,39 +8,76 @@ class PermissionsSeeder extends Seeder
 {
     private $roles = [
         'admin' => [
-            'read-user',
-            'create-user',
-            'update-user',
-            'delete-user',
-            'read-page',
-            'create-page',
-            'update-page',
-            'delete-page',
-            'read-media',
-            'create-media',
-            'update-media',
-            'delete-media',
+            // user
+            'user' => [
+                'read',
+                'create',
+                'update',
+                'delete',
+            ],
+
+            // page
+            'page' => [
+                'read',
+                'create',
+                'update',
+                'delete',
+            ],
+
+            // media
+            'media' => [
+                'read',
+                'create',
+                'update',
+                'delete',
+            ],
         ],
         'content-master' => [
-            'read-page',
-            'create-page',
-            'update-page',
-            'delete-page',
-            'read-media',
-            'create-media',
-            'update-media',
-            'delete-media',
+            // user
+            'user' => [
+                'read',
+            ],
+
+            // page
+            'page' => [
+                'read',
+                'create',
+                'update',
+                'delete',
+            ],
+
+            // media
+            'media' => [
+                'read',
+                'create',
+                'update',
+                'delete',
+            ],
         ],
         'content-author' => [
-            'read-page',
-            'read-media',
-            'create-media',
-            'update-media',
-            'delete-media',
+            // page
+            'page' => [
+                'read',
+            ],
+
+            // media
+            'media' => [
+                'read',
+                'create',
+                'update',
+                'delete',
+            ],
         ],
         'member' => [
-            'read-page',
-            'read-media',
+            // page
+            'page' => [
+                'read',
+            ],
+
+            // media
+            'media' => [
+                'read',
+            ],
         ],
     ];
 
@@ -54,11 +91,13 @@ class PermissionsSeeder extends Seeder
         // Reset cached roles and permissions
         app()['cache']->forget('spatie.permission.cache');
 
-        foreach ($this->roles as $role => $permissions) {
+        foreach ($this->roles as $role => $scopes) {
             $role = Role::create(['name' => $role]);
 
-            foreach ($permissions as $permission) {
-                Permission::findOrCreate($permission)->assignRole($role);
+            foreach ($scopes as $scope => $permissions) {
+                foreach ($permissions as $permission) {
+                    Permission::findOrCreate(sprintf('%s-%s', $scope, $permission))->assignRole($role);
+                }
             }
         }
     }
