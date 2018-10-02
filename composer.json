@@ -47,6 +47,8 @@
         }
     },
     "scripts": {
+        "db:seed": "@php artisan migrate:fresh --seed --force",
+        "db:migrate": "@php artisan migrate --force",
         "deploy": "git ftp push",
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
