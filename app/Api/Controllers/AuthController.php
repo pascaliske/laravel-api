@@ -27,11 +27,11 @@ class AuthController extends Controller
         $credentials = request(['email', 'password']);
 
         if (!User::canLogin($credentials['email'])->first()) {
-            return abort(403, 'User is not activated or confirmed');
+            return abort(403, 'AUTH_SIGN_IN_ERROR_NOT_CONFIRMED');
         }
 
         if (!$token = auth()->attempt($credentials, true)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return abort(401, 'AUTH_SIGN_IN_ERROR_UNAUTHORIZED');
         }
 
         return $this->respondWithToken($token);
@@ -70,7 +70,7 @@ class AuthController extends Controller
             $id = auth()->user()->id;
             return User::findOrFail($id)->with('roles')->first();
         } catch (Exception $e) {
-            return abort(401, 'Unauthorized');
+            return abort(401, 'AUTH_SIGN_IN_ERROR_UNAUTHORIZED');
         }
     }
 
