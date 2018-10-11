@@ -96,7 +96,7 @@ class PermissionsSeeder extends Seeder
 
             foreach ($scopes as $scope => $permissions) {
                 foreach ($permissions as $permission) {
-                    Permission::findOrCreate(sprintf('%s-%s', $scope, $permission))->assignRole($role);
+                    Permission::findOrCreate(sprintf('%s-%s', $permission, $scope))->assignRole($role);
                 }
             }
         }
