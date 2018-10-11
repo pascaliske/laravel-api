@@ -32,7 +32,7 @@ class Media extends Model
      */
     public function author()
     {
-        return $this->belongsTo('App\Api\Models\User', 'id');
+        return $this->belongsTo('App\Api\Models\User', 'author');
     }
 
     public function scopeImages($query)

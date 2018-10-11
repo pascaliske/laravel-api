@@ -27,7 +27,7 @@ class Page extends Model
      */
     public function author()
     {
-        return $this->belongsTo('App\Api\Models\User', 'id');
+        return $this->belongsTo('App\Api\Models\User', 'author');
     }
 
     public function scopePublished($query)
