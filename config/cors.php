@@ -20,7 +20,7 @@ return [
         'allow_credentials' => true,
 
         'allow_origins' => [
-            'http://localhost:4200',
+            env('APP_URL'),
         ],
 
         'allow_methods' => [
